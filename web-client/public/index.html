@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+
+<head>
+    <title>Certificación -- App</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
+    <link rel="stylesheet" href="assets/app.css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />
+</head>
+
+<body layout="column" ng-controller="AppCtrl" md-swipe-right="openSidenav('left')" md-swipe-left="closeSidenav('left')">
+    <md-toolbar class="md-hue-2 md-whiteframe-z4" layout="row" md-scroll-shrink>
+        <md-button ng-click="toggleLeft()" class="nav navbar-nav pull-left" hide-gt-sm>
+            <md-icon md-svg-src="./assets/svg/menu.svg"></md-icon>
+        </md-button>
+        <h1 class="nav-center">
+                <span>Noise Urban Maps</span>
+            </h1>
+    </md-toolbar>
+    <div flex layout="row">
+        <md-sidenav layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-whiteframe-z2">
+            <md-toolbar class="md-tall">
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <md-icon md-svg-src="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
+                    <div>{{currentUser.email}}</div>
+                </div>
+            </md-toolbar>
+            <md-content>
+                <md-list>
+                    <div ng-if="currentUser.rol == 'Administrador'">
+                        <md-subheader>Usuarios</md-subheader>
+                        <md-list-item ng-repeat="item in usersAdministration">
+                            <md-item-content md-ink-ripple layout="row" ui-sref={{item.link}} layout-align="start center" ng-click="closeSidenav('left')">
+                                <div class="inset">
+                                    <md-icon md-svg-src={{item.icon}}></md-icon>
+                                </div>
+                                <div class="inset">{{item.title}}</div>
+                            </md-item-content>
+                        </md-list-item>
+                    </div>
+                    <md-subheader>Menú</md-subheader>
+                    <md-list-item ng-repeat="item in options">
+                        <md-item-content md-ink-ripple layout="row" ui-sref={{item.link}} layout-align="start center" ng-click="closeSidenav('left')">
+                            <div class="inset">
+                                <md-icon md-svg-src={{item.icon}}></md-icon>
+                            </div>
+                            <div class="inset">{{item.title}}</div>
+                        </md-item-content>
+                    </md-list-item>
+                </md-list>
+                <md-content>
+        </md-sidenav>
+        <md-content style="background-color: #eee;" flex md-scroll-y>
+            <md-card class="md-whiteframe-z4">
+                <md-card-content>
+                    <!--<md-icon md-svg-src="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
+                            <h2>Lia luogo</h2>
+                             
+                            
+                              
+                            <p>
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                   </p>
+                            
+                                   <br/>
+                            
+                                   <p>
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                   </p>
+                            
+                                   <br/>
+                            <p>
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                   </p>
+                            
+                                <div ui-view="home" flex></div>
+                                <div ui-view="more" flex ></div>-->
+                    <div ui-view flex></div>
+                </md-card-content>
+        </md-content>
+        </md-card>
+    </div>
+    <!-- Angular Material Dependencies -->
+    <script src="/vendor/angular/angular.js"></script>
+    <script src="/vendor/angular-messages/angular-messages.js"></script>
+    <script src="/vendor/angular-resource/angular-resource.js"></script>
+    <script src="/vendor/angular-route/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="//cdn.jsdelivr.net/satellizer/0.12.5/satellizer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
+    <!-- Angular Material Javascript now available via Google CDN; version 0.9.4 used here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <!-- Controllers sources -->
+    <!-- Services sources -->
+</body>
+
+</html>
