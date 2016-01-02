@@ -1,0 +1,24 @@
+<md-content class="md-default-theme">
+    <md-content layout-padding>
+        <div flex>
+            <p>Refresh frequency in seconds</p>
+            <md-select flex="10" ng-model="freqRefresh">
+                <md-option ng-repeat="number in [1, 2, 3, 4,5,6,7,8,9,10]" ng-value='number'>
+                    {{number}}
+                </md-option>
+            </md-select>
+        </div>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+            <ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius" visible="c.visible" geodesic="c.geodesic" editable="c.editable" draggable="c.draggable" clickable="c.clickable" control="c.control"></ui-gmap-circle>
+        </ui-gmap-google-map>
+        <br>
+        <h3>Key</h3>
+        <md-list layout-padding layout="row">
+            <md-list-item class="md-2-line veggie-option" ng-repeat="item in colors" layout="row" layout-wrap>
+                <div align="center" style="background-color:{{item.color}}" class="md-whiteframe-z1" flex>
+                    <h4>{{item.noiseLvl}}</h4>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-content>

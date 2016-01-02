@@ -31,9 +31,9 @@ class Client(Ice.Application):
 			if not printer:
 				raise RuntimeError('Invalid proxy')
 				
-			temperature = random.randint(1,1000)
+			noiseLvl = random.randint(1,1000)
 			randomSensor = random.choice(sensors)
-			printer.write(str(randomSensor.id) + '**' + randomSensor.coords + '**' + str(temperature))
+			printer.write(str(randomSensor.id) + '**' + randomSensor.coords + '**' + str(noiseLvl))
 			
 			print(randomSensor.coords + ' ' + str(randomSensor.id))
 			#time.sleep(3)

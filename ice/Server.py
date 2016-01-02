@@ -11,10 +11,10 @@ from peewee import *
 db = MySQLDatabase('ubiqDB', user='root',passwd='root')
 
 
-class Sensor(peewee.Model):
-    coords = TextField()
-    identificator = IntegerField(unique=True)
-    temperature = IntegerField()
+class Sensors(peewee.Model):
+    coords = CharField()
+    identificator = IntegerField()
+    noiseLvl = IntegerField()
 
     class Meta:
         database = db
@@ -34,11 +34,11 @@ class PrinterI(Example.Printer):
 		utils = Utils()
 
 		splitedMsg = utils.splitSensorMsg(message)
-		sensor = Sensor.select().where(Sensor.identificator == splitedMsg[0])
+		sensor = Sensors.select().where(Sensors.identificator == splitedMsg[0])
 		if sensor:
-			Sensor.update(temperature = splitedMsg[2]).where(Sensor.identificator == splitedMsg[0]).execute()
+			Sensors.update(noiseLvl = splitedMsg[2]).where(Sensors.identificator == splitedMsg[0]).execute()
 		else:
-			Sensor.create(identificator = splitedMsg[0], coords=splitedMsg[1], temperature=splitedMsg[2])
+			Sensors.create(identificator = splitedMsg[0], coords=splitedMsg[1], noiseLvl=splitedMsg[2])
 			
 		sys.stdout.flush()
 		self.n += 1
@@ -53,8 +53,8 @@ class Server(Ice.Application):
 		
 		print(proxy)
 		sys.stdout.flush()
-		if not Sensor.table_exists():
-			Sensor.create_table()
+		if not Sensors.table_exists():
+			Sensors.create_table()
 		
 		adapter.activate()
 		self.shutdownOnInterrupt()

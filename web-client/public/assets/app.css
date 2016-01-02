@@ -8,6 +8,7 @@ html, body {
 
 /* Toolbar area */
 
+
 .menu {
   background-color: transparent;
   border: none;
@@ -154,3 +155,5 @@ md-list md-list-item button.md-button:not(.selected):not([disabled]) {
   height:100px;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
 }
+
+.angular-google-map-container { height: 600px; }

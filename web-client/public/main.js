@@ -1,5 +1,5 @@
-var app = angular.module('MyApp', ['ngResource', 'ngRoute', 'ngMessages', 'ui.router', 'ngMaterial', 'ngAnimate', 'angular-loading-bar']);
-app.config(function($stateProvider, $urlRouterProvider) {
+var app = angular.module('MyApp', ['ngResource', 'ngRoute', 'ngMessages', 'ui.router', 'ngMaterial', 'ngAnimate', 'angular-loading-bar', 'uiGmapgoogle-maps']);
+app.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 
 
 
@@ -7,27 +7,46 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('index', {
             url: "/",
             templateUrl: 'partials/welcome.html',
-            /*views: {
-              "home": { templateUrl: "/partials/home.html" },
-              "more": { templateUrl: "/partials/home.html" }
-            }*/
         })
         .state('home', {
             url: '/home',
             templateUrl: 'partials/home.html',
         })
-       
+        .state('gmaps', {
+            url: '/noiseMap',
+            templateUrl: 'partials/noiseMap.html',
+            controller: 'GMapsCtrl'
+        })
+        .state('about', {
+            url: '/about',
+            templateUrl: 'partials/about.html'
+        })
+
+
 
 
     $urlRouterProvider.otherwise('/');
+
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue-grey', {
+            'default': '400', // by default use shade 400 from the pink palette for primary intentions
+            'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+            'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+            'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
+        })
+        // If you specify less than all of the keys, it will inherit from the
+        // default shades
+        .accentPalette('purple', {
+            'default': '200' // use shade 200 for default, and keep all other shades the same
+        });
 });
 
 app.controller('AppCtrl', function($scope, $timeout, $mdSidenav, $rootScope, $window) {
 
-    
 
 
- 
+
+
     $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (toState.resolve) {
             $rootScope.stateIsLoading = true;
@@ -50,19 +69,19 @@ app.controller('AppCtrl', function($scope, $timeout, $mdSidenav, $rootScope, $wi
     };
 
     $scope.options = [{
-        link: 'home',
-        title: 'Inicio',
-        icon: 'assets/svg/file-document-box.svg'
+        link: 'index',
+        title: 'Home',
+        icon: 'assets/svg/home.svg'
     }, {
-        link: 'map',
-        title: 'Mapa urbano de contaminación',
-        icon: 'assets/svg/file-document-box.svg'
+        link: 'gmaps',
+        title: 'Noise pollution urban maps',
+        icon: 'assets/svg/map.svg'
     }, {
-        link: 'contact',
-        title: 'Contacto',
-        icon: 'assets/svg/file-document-box.svg'
+        link: 'about',
+        title: 'About',
+        icon: 'assets/svg/account.svg'
     }];
- 
+
 });
 
 app.directive('userAvatar', function() {
