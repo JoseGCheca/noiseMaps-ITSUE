@@ -4,9 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var models = require("./models");
 var sensors = require('./routes/sensorsRoutes');
-
 var app = express();
 
 // view engine setup
@@ -38,6 +37,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    console.log(err)
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
